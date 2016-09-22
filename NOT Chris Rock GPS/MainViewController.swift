@@ -9,6 +9,7 @@
 import Foundation
 import SDWebImage
 //import UIActivityIndicator_for_SDWebImage
+import FBSDKLoginKit
 
 class MainViewController: UIViewController, AudioRecorderViewControllerDelegate {
     
@@ -73,6 +74,11 @@ class MainViewController: UIViewController, AudioRecorderViewControllerDelegate 
             
             NSUserDefaults.standardUserDefaults().removeObjectForKey("userDetail")
             NSUserDefaults.standardUserDefaults().synchronize()
+            
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                //FBSDKLoginManager().logOut()
+            }
+            UIApplication.sharedApplication().applicationIconBadgeNumber = 0
             
             let navLogin = self.storyboard?.instantiateViewControllerWithIdentifier("SignInViewController") as! SignInViewController
             self.navigationController?.setViewControllers([navLogin], animated: true)

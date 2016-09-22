@@ -15,6 +15,7 @@
 		5E9786941D925EBF0031B0CB /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786931D925EBF0031B0CB /* testViewController.swift */; };
 		5E9786961D928B520031B0CB /* MyExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786951D928B520031B0CB /* MyExtention.swift */; };
 		5E9786981D92AAA70031B0CB /* PDSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786971D92AAA70031B0CB /* PDSwitch.swift */; };
+		5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274211D945E7B001AB48D /* SetDataViewController.swift */; };
 		A52D1CA082BFB1D95A2BFEAF /* Pods_NOT_Chris_Rock_GPS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42050BA16180614E68FFE74 /* Pods_NOT_Chris_Rock_GPS.framework */; };
 		DA334BF61D8A81AE002E4E1F /* MultipleTapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA334BF51D8A81AE002E4E1F /* MultipleTapViewController.swift */; };
 		DA6AE7C21D88C782001E5B65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE7C11D88C782001E5B65 /* AppDelegate.swift */; };
@@ -66,6 +67,7 @@
 		5E9786931D925EBF0031B0CB /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		5E9786951D928B520031B0CB /* MyExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyExtention.swift; sourceTree = "<group>"; };
 		5E9786971D92AAA70031B0CB /* PDSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDSwitch.swift; sourceTree = "<group>"; };
+		5EA274211D945E7B001AB48D /* SetDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDataViewController.swift; sourceTree = "<group>"; };
 		641E7EB4FC3A22ED1FC64B5A /* Pods-NOT Chris Rock GPS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOT Chris Rock GPS.release.xcconfig"; path = "Pods/Target Support Files/Pods-NOT Chris Rock GPS/Pods-NOT Chris Rock GPS.release.xcconfig"; sourceTree = "<group>"; };
 		A3F369191E0C0EA3CDC0AD6E /* Pods-NOT Chris Rock GPS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOT Chris Rock GPS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NOT Chris Rock GPS/Pods-NOT Chris Rock GPS.debug.xcconfig"; sourceTree = "<group>"; };
 		D42050BA16180614E68FFE74 /* Pods_NOT_Chris_Rock_GPS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOT_Chris_Rock_GPS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 			children = (
 				5E97868E1D925EA50031B0CB /* SignInViewController.swift */,
 				5E97868F1D925EA50031B0CB /* SignUpViewController.swift */,
+				5EA274211D945E7B001AB48D /* SetDataViewController.swift */,
 				5E9786931D925EBF0031B0CB /* testViewController.swift */,
 			);
 			name = "Login Signup";
@@ -481,6 +484,7 @@
 				DA6AE80F1D89E403001E5B65 /* GooglePlacesViewController.swift in Sources */,
 				DA6AE8141D8A24AE001E5B65 /* MainViewController.swift in Sources */,
 				5E9786941D925EBF0031B0CB /* testViewController.swift in Sources */,
+				5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */,
 				DA6AE8081D89124C001E5B65 /* OpenWeatherViewController.swift in Sources */,
 				DA6AE7CA1D88C782001E5B65 /* NOT_Chris_Rock_GPS.xcdatamodeld in Sources */,
 				DA6AE80D1D89B169001E5B65 /* Weather.swift in Sources */,

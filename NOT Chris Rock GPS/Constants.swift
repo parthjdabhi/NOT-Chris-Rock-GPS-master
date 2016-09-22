@@ -13,8 +13,10 @@ let BaseURL = "http://www.notchrisrock.com/gps/api/"
 //Login Registration API
 let url_login           = BaseURL + "login.php"
 let url_register        = BaseURL + "register.php"
+let url_fb_register     = BaseURL + "facebook_register.php"
+let url_updateProfile   = BaseURL + "update.php"
+
 let url_setProfilePic   = BaseURL + "profile.php"
-let url_setProfile      = BaseURL + ""
 let url_soundFiles      = BaseURL + "sounds.php"
 
 let googlePlacesAPIKey  = "AIzaSyCQ9yhrhgV3OEJPzFb_87XfJzl0O3_OXRM"

@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 import OAuthSwift
 import GooglePlaces
-
+import FBSDKCoreKit
+import FBSDKLoginKit
 import IQKeyboardManagerSwift
 import SVProgressHUD
 
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setDefaultAnimationType(SVProgressHUDAnimationType.Native)
         SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Black)
         
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         if let user = NSUserDefaults.standardUserDefaults().objectForKey("userDetail") as? [String : AnyObject]
         {
@@ -53,8 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationHandleOpenURL(url: NSURL) {
-        
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    
+    func applicationHandleOpenURL(url: NSURL)
+    {
         if (url.host == "oauth-callback") {
             OAuthSwift.handleOpenURL(url)
         } else {
@@ -85,6 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
     }
 
     // MARK: - Core Data stack

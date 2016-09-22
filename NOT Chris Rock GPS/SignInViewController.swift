@@ -12,6 +12,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SVProgressHUD
+import FBSDKLoginKit
+import FBSDKShareKit
 
 class SignInViewController: UIViewController {
     
@@ -110,5 +112,113 @@ class SignInViewController: UIViewController {
             let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alert.addAction(action)
         }
+    }
+    
+    
+    @IBAction func onClickFacebookButton(sender: UIButton){
+        let login = FBSDKLoginManager()
+        login.loginBehavior = FBSDKLoginBehavior.SystemAccount
+        login.logInWithReadPermissions(["public_profile", "email"], fromViewController: self, handler: {(result, error) in
+            if error != nil {
+                print("Error :  \(error.description)")
+            }
+            else if result.isCancelled {
+                 print("Login cancelled")
+            }
+            else {
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "first_name, last_name, picture.type(large), email, name, id, gender"]).startWithCompletionHandler({(connection, result, error) -> Void in
+                    if error != nil{
+                        print("Error : \(error.description)")
+                    } else {
+                        print("userInfo is \(result))")
+                        
+                        let facebookData = result as! NSDictionary //FACEBOOK DATA IN DICTIONARY
+                        print("facebookData : \(facebookData)")
+                        
+                        var CUserDetail = [String: AnyObject]()
+                        
+                        if facebookData.objectForKey("name") != nil {
+                            CUserDetail["name"] = (facebookData.objectForKey("name") as? String) ?? ""
+                        }
+                        if facebookData.objectForKey("email") != nil {
+                            CUserDetail["email"] = (facebookData.objectForKey("email") as? String) ?? ""
+                        }
+                        if facebookData.objectForKey("id") != nil {
+                            CUserDetail["fbid"] = (facebookData.objectForKey("id") as? String) ?? ""
+                            CUserDetail["photo"] = NSURL(string: "http://graph.facebook.com/\(facebookData.objectForKey("id") as? String ?? "")/picture?type=large")
+                        }
+                        if facebookData.objectForKey("gender") != nil {
+                            CUserDetail["gender"] = facebookData.objectForKey("gender") as? String ?? ""
+                        }
+                        if FBSDKAccessToken.currentAccessToken() != nil {
+                            CUserDetail["FBAccessToken"] = FBSDKAccessToken.currentAccessToken().tokenString
+                        } else {
+                            CUserDetail["FBAccessToken"] = "0"
+                        }
+                        
+                        CUserDetail["device_id"] = "0"
+                        CUserDetail["device_type"] = "IOS"
+                        
+                        print(CUserDetail)
+                        SVProgressHUD.showWithStatus("Signing in..")
+                        
+                        Alamofire.request(.POST, url_fb_register, parameters: CUserDetail)
+                            .validate()
+                            .responseJSON { response in
+                                CommonUtils.sharedUtils.hideProgress()
+                                switch response.result
+                                {
+                                case .Success(let data):
+                                    let json = JSON(data)
+                                    print(json.dictionary)
+                                    
+                                    if let status = json["status"].string,
+                                        result = json["result"].dictionaryObject
+                                        where status == "1"
+                                    {
+                                        print(json["msg"].string)
+                                        
+                                        if result["is_profile_updated"] as? Int ?? "" == 0 {
+                                            SVProgressHUD.showSuccessWithStatus(json["msg"].string ?? "Register successfully")
+                                            
+                                            userDetail = result
+                                            NSUserDefaults.standardUserDefaults().setObject(result, forKey: "userDetail")
+                                            NSUserDefaults.standardUserDefaults().synchronize()
+                                            
+                                            //Go To Update Information
+                                            //self.performSegueWithIdentifier("segueSetData", sender: nil)
+                                            
+                                            let setDataVC = self.storyboard?.instantiateViewControllerWithIdentifier("SetDataViewController") as! SetDataViewController
+                                            self.navigationController?.pushViewController(setDataVC, animated: true)
+                                        } else {
+                                            SVProgressHUD.showSuccessWithStatus(json["msg"].string ?? "Login successfully")
+                                            
+                                            userDetail = result
+                                            NSUserDefaults.standardUserDefaults().setObject(result, forKey: "userDetail")
+                                            NSUserDefaults.standardUserDefaults().synchronize()
+                                            
+                                            //Go To Main Screen
+                                            self.performSegueWithIdentifier("segueHome", sender: nil)
+                                        }
+                                    }
+                                    else if let msg = json["msg"].string {
+                                        print(msg)
+                                        SVProgressHUD.showErrorWithStatus(msg)
+                                        self.navigationController?.popViewControllerAnimated(true)
+                                    } else {
+                                        SVProgressHUD.showErrorWithStatus("Unable to register!")    // error?.localizedDescription
+                                    }
+                                    //"status": 1, "result": , "msg": Registraion success! Please check your email for activation key.
+                                    
+                                case .Failure(let error):
+                                    print("Request failed with error: \(error)")
+                                    //CommonUtils.sharedUtils.showAlert(self, title: "Error", message: (error?.localizedDescription)!)
+                                }
+                        }
+                    }
+                })
+            }
+            
+        })
     }
 }
