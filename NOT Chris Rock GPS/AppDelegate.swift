@@ -15,7 +15,7 @@ import FBSDKLoginKit
 import IQKeyboardManagerSwift
 import SVProgressHUD
 
-@UIApplicationMain
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -160,6 +160,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+}
 
+// MARK: - Tap Detector
+
+class UIApplicationTimer: UIApplication {
+    
+    static let ApplicationDidTimoutNotification = "AppTimout"
+    
+    // The timeout in seconds for when to fire the idle timer.
+    let timeoutInSeconds: NSTimeInterval = 10 //* 60
+    
+    var idleTimer: NSTimer?
+    
+    // Listen for any touch. If the screen receives a touch, the timer is reset.
+    override func sendEvent(event: UIEvent) {
+        super.sendEvent(event)
+        
+//        if idleTimer != nil {
+//            self.resetIdleTimer()
+//        }
+        
+        if let touches = event.allTouches() {
+            for touch in touches {
+                if touch.phase == UITouchPhase.Began {
+                    self.checkThisTap()
+                }
+            }
+        }
+    }
+    
+    // Resent the timer because there was user interaction.
+    // Resent the timer because there was user interaction.
+    func checkThisTap()
+    {
+        tapStack.append(NSDate())
+        print(" Count : ", tapStack.count, "First : ", tapStack.first, "Last : ", tapStack.last)
+        
+        if tapStack.count > 5 {
+            tapStack.removeFirst()
+        }
+        
+        if tapStack.count == 5 {
+            let elapsedTime = tapStack.last!.timeIntervalSinceDate(tapStack.first!)
+            //let duration = Int(elapsedTime)
+            if elapsedTime <= tapInSeconds { //Timeout time to detect taps in 10 seconds
+                tapStack.removeAll()
+                DetectedFiveTaps()
+            }
+        }
+    }
+    
+    // If the timer reaches the limit as defined in timeoutInSeconds, post this notification.
+    func DetectedFiveTaps() {
+        print("DetectedFiveTaps")
+        topViewController()?.ShowRecodringScreen()
+        NSNotificationCenter.defaultCenter().postNotificationName(ApplicationDidFiveTapsNotification, object: nil)
+    }
 }
 

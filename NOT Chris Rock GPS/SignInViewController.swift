@@ -27,6 +27,8 @@ class SignInViewController: UIViewController {
     // MARK: Lifecycle
     override func viewDidLoad()
     {
+        //self.startFiveTapGesture()
+        
         txtEmail.setCornerRadious()
         txtPassword.setCornerRadious()
         txtEmail.setPlaceholderColor(UIColor.darkGrayColor())

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E65AB131D9542560025CBE3 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */; };
+		5E65AB151D95507C0025CBE3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65AB141D95507C0025CBE3 /* main.swift */; };
 		5E9786831D9255420031B0CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E9786821D9255420031B0CB /* Images.xcassets */; };
 		5E9786891D92559D0031B0CB /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786851D92559D0031B0CB /* AudioRecorderViewController.swift */; };
 		5E97868A1D92559D0031B0CB /* AudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9786861D92559D0031B0CB /* AudioRecorderViewController.xib */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
+		5E65AB141D95507C0025CBE3 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5E9786821D9255420031B0CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5E9786851D92559D0031B0CB /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		5E9786861D92559D0031B0CB /* AudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecorderViewController.xib; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				DA6AE7FD1D88C8D6001E5B65 /* Storyboard & Plist */,
+				5E65AB141D95507C0025CBE3 /* main.swift */,
 				DA6AE7C11D88C782001E5B65 /* AppDelegate.swift */,
 				5E97868D1D925AD30031B0CB /* Login Signup */,
 				DA6AE8131D8A24AE001E5B65 /* MainViewController.swift */,
@@ -227,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				5E9786971D92AAA70031B0CB /* PDSwitch.swift */,
+				5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */,
 				5E9786951D928B520031B0CB /* MyExtention.swift */,
 				DA6AE7F31D88C7B6001E5B65 /* Constants.swift */,
 				DA6AE7F51D88C805001E5B65 /* CommonUtils.swift */,
@@ -474,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA6AE7C41D88C782001E5B65 /* ViewController.swift in Sources */,
+				5E65AB131D9542560025CBE3 /* UIViewControllerExt.swift in Sources */,
 				DA6AE80A1D89A8BA001E5B65 /* WeatherGetter.swift in Sources */,
 				DA6AE7FA1D88C850001E5B65 /* MBProgressHUD.m in Sources */,
 				DA6AE8001D88C907001E5B65 /* AppState.swift in Sources */,
@@ -486,6 +493,7 @@
 				5E9786941D925EBF0031B0CB /* testViewController.swift in Sources */,
 				5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */,
 				DA6AE8081D89124C001E5B65 /* OpenWeatherViewController.swift in Sources */,
+				5E65AB151D95507C0025CBE3 /* main.swift in Sources */,
 				DA6AE7CA1D88C782001E5B65 /* NOT_Chris_Rock_GPS.xcdatamodeld in Sources */,
 				DA6AE80D1D89B169001E5B65 /* Weather.swift in Sources */,
 				DA6AE8011D88C907001E5B65 /* AEXML.swift in Sources */,

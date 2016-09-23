@@ -11,7 +11,7 @@ import SDWebImage
 //import UIActivityIndicator_for_SDWebImage
 import FBSDKLoginKit
 
-class MainViewController: UIViewController, AudioRecorderViewControllerDelegate {
+class MainViewController: UIViewController {
     
     // MARK: -
     // MARK: Vars
@@ -87,7 +87,7 @@ class MainViewController: UIViewController, AudioRecorderViewControllerDelegate 
         presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
-    func audioRecorderViewControllerDismissed(withFileURL fileURL: NSURL?) {
+    override func audioRecorderViewControllerDismissed(withFileURL fileURL: NSURL?) {
         // do something with fileURL
         dismissViewControllerAnimated(true, completion: nil)
     }
