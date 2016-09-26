@@ -139,7 +139,7 @@ class SetDataViewController: UIViewController, UITextFieldDelegate, UITableViewD
 //        }
         else
         {
-            let Parameters = ["submitted": "1",
+            let Parameters = ["user_id": user_id,
                               "name" : self.txtName.text ?? "",
                               "email" : self.txtEmail.text ?? "",
                               "gender" : genderType[swGender?.selectedIndex ?? 0],
@@ -172,8 +172,8 @@ class SetDataViewController: UIViewController, UITextFieldDelegate, UITableViewD
                             print(json.dictionary)
                             //print(json.dictionaryObject)
                             
-                            self.performSegueWithIdentifier("segueHome", sender: self)
-                            return
+                            //self.performSegueWithIdentifier("segueHome", sender: self)
+                            //return
                             
                             if let status = json["status"].string,
                                 result = json["result"].dictionaryObject
@@ -198,9 +198,9 @@ class SetDataViewController: UIViewController, UITextFieldDelegate, UITableViewD
                             //"status": 1, "result": , "msg": Registraion success! Please check your email for activation key.
                             
                         case .Failure(let error):
-                            SVProgressHUD.dismiss()
-                            self.performSegueWithIdentifier("segueHome", sender: self)
-                            return
+                            //SVProgressHUD.dismiss()
+                            //self.performSegueWithIdentifier("segueHome", sender: self)
+                            //return
                             print("Request failed with error: \(error)")
                             SVProgressHUD.dismiss()
                             self.showAlert("Error", message: error.description)
@@ -208,9 +208,9 @@ class SetDataViewController: UIViewController, UITextFieldDelegate, UITableViewD
                     }
                 //break
                 case .Failure(let errorType):
-                    SVProgressHUD.dismiss()
-                    self.performSegueWithIdentifier("segueHome", sender: self)
-                    return
+                    //SVProgressHUD.dismiss()
+                    //self.performSegueWithIdentifier("segueHome", sender: self)
+                    //return
                     print("Request failed with error: \(errorType)")
                     SVProgressHUD.dismiss()
                     self.showAlert("Error", message: "Unable to save!")

@@ -164,12 +164,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - Tap Detector
 
+var tapStack:Array<NSDate> = []
+let ApplicationDidFiveTapsNotification = "DetectedFiveTaps"
+
 class UIApplicationTimer: UIApplication {
     
     static let ApplicationDidTimoutNotification = "AppTimout"
     
     // The timeout in seconds for when to fire the idle timer.
-    let timeoutInSeconds: NSTimeInterval = 10 //* 60
+    let tapInSeconds: NSTimeInterval = 5 //* 60
     
     var idleTimer: NSTimer?
     

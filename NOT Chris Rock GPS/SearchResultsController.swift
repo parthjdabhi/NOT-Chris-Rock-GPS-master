@@ -22,7 +22,6 @@ class SearchResultsController: UITableViewController {
         super.viewDidLoad()
         self.searchResults = Array()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cellIdentifier")
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +32,6 @@ class SearchResultsController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
         return 1
     }
 

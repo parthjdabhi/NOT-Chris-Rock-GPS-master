@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-let tapInSeconds: NSTimeInterval = 10
-var tapStack:Array<NSDate> = []
-let ApplicationDidFiveTapsNotification = "DetectedFiveTaps"
 
 //extension UIViewController
 //{

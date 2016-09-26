@@ -45,6 +45,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func googlePlaces(sender: AnyObject) {
+        //self.navigationController?.navigationBarHidden = false
         let next = self.storyboard?.instantiateViewControllerWithIdentifier("GooglePlacesViewController") as! GooglePlacesViewController!
         self.navigationController?.pushViewController(next, animated: true)
     }

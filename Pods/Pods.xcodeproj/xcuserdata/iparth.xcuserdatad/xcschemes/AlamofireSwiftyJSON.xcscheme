@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FEFAE7F574DAEF82F05DE0BCCA7C7B40'
-               BlueprintName = 'SVProgressHUD'
+               BlueprintIdentifier = 'B8A55784801404DA0A51E1829BBB0F54'
+               BlueprintName = 'AlamofireSwiftyJSON'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SVProgressHUD.framework'>
+               BuildableName = 'AlamofireSwiftyJSON.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -28,4 +28,10 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 
+pod 'SDWebImage', '~>3.8'
+pod 'UIActivityIndicator-for-SDWebImage'
+
+pod 'Alamofire', '~> 3.4'
+pod 'AlamofireSwiftyJSON', '~> 0.1'
+
 end

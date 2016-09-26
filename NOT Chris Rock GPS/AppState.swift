@@ -23,6 +23,10 @@ class AppState: NSObject {
 //Global Data
 //var userData: [String : AnyObject] = [:]
 var userDetail:Dictionary<String,AnyObject> = [:]
+var user_id:String = {
+    return userDetail["user_id"] as? String ?? ""
+}()
+
 
 //var CLocation:CLLocation = CLLocation()
 //var CLocationPlace:String = String()
