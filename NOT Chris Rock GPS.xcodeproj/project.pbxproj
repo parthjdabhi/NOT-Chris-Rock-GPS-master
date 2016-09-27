@@ -19,6 +19,7 @@
 		5E9786961D928B520031B0CB /* MyExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786951D928B520031B0CB /* MyExtention.swift */; };
 		5E9786981D92AAA70031B0CB /* PDSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786971D92AAA70031B0CB /* PDSwitch.swift */; };
 		5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274211D945E7B001AB48D /* SetDataViewController.swift */; };
+		5EDF398C1D9ABB660058C704 /* GUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF398B1D9ABB660058C704 /* GUtility.swift */; };
 		A52D1CA082BFB1D95A2BFEAF /* Pods_NOT_Chris_Rock_GPS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42050BA16180614E68FFE74 /* Pods_NOT_Chris_Rock_GPS.framework */; };
 		DA334BF61D8A81AE002E4E1F /* MultipleTapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA334BF51D8A81AE002E4E1F /* MultipleTapViewController.swift */; };
 		DA6AE7C21D88C782001E5B65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6AE7C11D88C782001E5B65 /* AppDelegate.swift */; };
@@ -74,6 +75,7 @@
 		5E9786951D928B520031B0CB /* MyExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyExtention.swift; sourceTree = "<group>"; };
 		5E9786971D92AAA70031B0CB /* PDSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDSwitch.swift; sourceTree = "<group>"; };
 		5EA274211D945E7B001AB48D /* SetDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDataViewController.swift; sourceTree = "<group>"; };
+		5EDF398B1D9ABB660058C704 /* GUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUtility.swift; sourceTree = "<group>"; };
 		641E7EB4FC3A22ED1FC64B5A /* Pods-NOT Chris Rock GPS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOT Chris Rock GPS.release.xcconfig"; path = "Pods/Target Support Files/Pods-NOT Chris Rock GPS/Pods-NOT Chris Rock GPS.release.xcconfig"; sourceTree = "<group>"; };
 		A3F369191E0C0EA3CDC0AD6E /* Pods-NOT Chris Rock GPS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NOT Chris Rock GPS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NOT Chris Rock GPS/Pods-NOT Chris Rock GPS.debug.xcconfig"; sourceTree = "<group>"; };
 		D42050BA16180614E68FFE74 /* Pods_NOT_Chris_Rock_GPS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NOT_Chris_Rock_GPS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				DA6AE7FD1D88C8D6001E5B65 /* Storyboard & Plist */,
 				5E65AB141D95507C0025CBE3 /* main.swift */,
 				DA6AE7C11D88C782001E5B65 /* AppDelegate.swift */,
+				5EDF398B1D9ABB660058C704 /* GUtility.swift */,
 				5E97868D1D925AD30031B0CB /* Login Signup */,
 				DA6AE8131D8A24AE001E5B65 /* MainViewController.swift */,
 				DA6AE7C31D88C782001E5B65 /* ViewController.swift */,
@@ -506,6 +509,7 @@
 				DA6AE7C21D88C782001E5B65 /* AppDelegate.swift in Sources */,
 				DA6AE7F41D88C7B6001E5B65 /* Constants.swift in Sources */,
 				5E38581A1D99801F00DEC418 /* PlaceViewController.swift in Sources */,
+				5EDF398C1D9ABB660058C704 /* GUtility.swift in Sources */,
 				DA6AE8111D89E442001E5B65 /* SearchResultsController.swift in Sources */,
 				5E9786901D925EA50031B0CB /* SignInViewController.swift in Sources */,
 				DA6AE8061D88E1AA001E5B65 /* YelpAPIClient.swift in Sources */,

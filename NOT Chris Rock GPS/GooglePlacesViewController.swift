@@ -16,9 +16,11 @@ import SwiftyJSON
 class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var googleMapsContainer: UIView!
-    @IBOutlet weak var googleMapsView: GMSMapView!
+    //@IBOutlet var googleMapsView: GMSMapView!
+    @IBOutlet var googleMVContainer: UIView!
+    @IBOutlet weak var btnRefreshNearByPlace: UIButton!
     
-    //var googleMapsView: GMSMapView!
+    var googleMapsView: GMSMapView!
     var searchResultController: SearchResultsController!
     var resultsArray = [String]()
     var locationManager = CLLocationManager()
@@ -28,8 +30,14 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
         //self.navigationController?.navigationBarHidden = false
         // Do any additional setup after loading the view, typically from a nib.
         
-        //googleMapsView = GMSMapView(frame: UIScreen.mainScreen().bounds)
-        //self.view.addSubview(self.googleMapsView)
+        btnRefreshNearByPlace.setCornerRadious()
+        btnRefreshNearByPlace.setBorder(1.0, color: clrGreen)
+        
+        googleMVContainer.layoutIfNeeded()
+        var frameMV = googleMVContainer.frame
+        frameMV.origin.y = 0
+        googleMapsView = GMSMapView(frame: frameMV)
+        self.googleMVContainer.insertSubview(self.googleMapsView, atIndex: 0)
         
         GMSServices.provideAPIKey(googleMapsApiKey)
         //self.googleMapsView.addObserver(self, forKeyPath: "myLocation", options: .New, context: nil)
@@ -171,13 +179,17 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
                 if (errornum == true) {
                     print("Error",errornum)
                 } else {
-                    let routes = json["routes"].array
-                    if routes != nil {
-                        let overViewPolyLine = routes![0]["overview_polyline"]["points"].string
+                    
+                    if let routes = json["routes"].array
+                        where routes.count > 0
+                    {
+                        let overViewPolyLine = routes[0]["overview_polyline"]["points"].string
                         print(overViewPolyLine)
                         if overViewPolyLine != nil{
                             self.addPolyLineWithEncodedStringInMap(overViewPolyLine!)
                         }
+                    } else {
+                        self.googleMapsView.clear()
                     }
                 }
                 
@@ -187,13 +199,111 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
         }
     }
     
-    func addPolyLineWithEncodedStringInMap(encodedString: String) {
-        
+    func addPolyLineWithEncodedStringInMap(encodedString: String)
+    {
         let path = GMSMutablePath(fromEncodedPath: encodedString)
         let polyLine = GMSPolyline(path: path)
         polyLine.strokeWidth = 5
         polyLine.strokeColor = clrGreen
         polyLine.map = self.googleMapsView
+    }
+    
+    @IBAction func actionRefreshNearByPlace(sender: AnyObject)
+    {
+        //For Search Via Google Maps Api
+        showNearByPlaceByGoogleAPI(["food"])
         
+        //For Search Via Yelp
+        //showNearByPlace(["food"])
+    }
+    
+    //Searcing by yelp api
+    func showNearByPlace(ofCategory:[String])
+    {
+        
+        client.searchPlacesWithParameters(["ll": "\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)", "category_filter": "burgers", "radius_filter": "3000","term": "food", "sort": "0"], successSearch: { (data, response) -> Void in
+            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+            print("Search : ", NSString(data: data, encoding: NSUTF8StringEncoding))
+            let json = JSON(data)
+            print(json)
+            
+            if (json["response"].string ?? "") == "success" {
+                
+            }
+//            self.burgerLabel.text = String(client.searchPlacesWithParameters(["ll": "37.788022,-122.399797", "category_filter": "burgers", "radius_filter": "3000", "sort": "0"], successSearch: { (data, response) -> Void in
+//            }) { (error) -> Void in
+//                print(error)
+//                })
+            
+        }) { (error) -> Void in
+            print(error)
+        }
+
+    }
+    
+    //Searcing by google api
+    func showNearByPlaceByGoogleAPI(ofCategory:[String])
+    {
+        
+        let directionURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=\(googleMapsApiKey)&sensor=false&location=\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)&radius=10000&types=store&hasNextPage=true&nextPage()=true&types=\(ofCategory.joinWithSeparator(","))"
+        //"https://maps.googleapis.com/maps/api/directions/json?origin=\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)&destination=\(CLocationSelected.coordinate.latitude),\(CLocationSelected.coordinate.longitude)&key=\(googleMapsApiKey)&mode=walking"
+        //mode:driving,walking,bicycling,transit
+        
+        //https ://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyB5jzZt5pc9-WVIEvfaBIZAIvQOYLhVu94&sensor=false&location=51.52864165,-0.10179430&radius=10000&types=store&hasNextPage=true&nextPage()=true&&pagetoken=CqQDmgEAAKT5-i-8iY5K4SPtMicW7Z2cUkGpM1kWiUIXSogohSio3vdw1bdSanD-mad_KgnSzk34KrXEfrTi6ABLxQidFTub6ilmoxRJx6bNhGSYdqkaJfW5h4Srw-7vkBToqto_NboFDMWzCAEzCqK1RgRGjRkWgPaHLi0gQ7wSTg9gecVVB-FAJ55QJO8w5lFrV5sAR-OF7yQ0Xqr9b2b4FyLoTBl-onaNNTqbycZXBFY28ychJywlQP3HbyfNVyU0sb5GODMbwZrQqP1JuolO_fhMnXyBYP3dwnFJVmdL25ms3b3DFwzTEII-3XeJWmPceSZnTIsLXn9-05JOWyTbaj0gI38G-1DeUUxthp7KDq47rTrNW5ogEfAO9pcfsIT7eSCzex5RhIvz1ohqpVYKT_Lr09MPQ6pYaEJ4ZY3_658aIi6GjcM4HkH2VDmfk-6DzF_hK3GFCbNeo1MjVlnPIt7Kp_6IvY-8aO0Xy8S3CAjtGLWXy0uxsADEMnC_mynFP0JhJJnbTu8RWuhPQbX0qdijx26fGXz1SlevkG2plENfnn2HEhBj-lJuu6Ua5-sngBrCzLXvGhRd_ubAQ4408c9YSShDc0RmhC5ogQ
+        print(directionURL)
+        
+        Alamofire.request(.GET, directionURL, parameters: nil).responseJSON { response in
+            
+            switch response.result {
+                
+            case .Success(let data):
+                
+                let json = JSON(data)
+                let errornum = json["error"]
+                print(json)
+                
+                if (errornum == true) {
+                    print("Error",errornum)
+                } else {
+                    
+                    var places:[GMSMarker] = []
+                    
+                    let marker = GMSMarker(position: CLocation!.coordinate)
+                    marker.groundAnchor = CGPoint(x: 0.5, y: 1)
+                    marker.appearAnimation = kGMSMarkerAnimationPop
+                    marker.icon = UIImage(named: "default_marker.png")
+                    places.append(marker)
+                    
+                    if let results = json["results"].array
+                        where results.count > 0
+                    {
+                        //name
+                        for result in results {
+                            let marker = GMSMarker()
+                            marker.groundAnchor = CGPoint(x: 0.5, y: 1)
+                            marker.appearAnimation = kGMSMarkerAnimationPop
+                            marker.icon = UIImage(named: "default_marker.png")
+                            
+                            marker.title = result["name"].string
+                            marker.snippet = result["vicinity"].string
+                            
+                            marker.position = CLLocation(latitude: (result["geometry"]["location"]["lat"].double ?? 0), longitude: result["geometry"]["location"]["lng"].double ?? 0).coordinate
+                            places.append(marker)
+                            
+                        }
+                        
+                        for place: GMSMarker in places {
+                            place.map = self.googleMapsView
+                        }
+                        
+                    } else {
+                        self.googleMapsView.clear()
+                    }
+                }
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+            }
+        }
     }
 }

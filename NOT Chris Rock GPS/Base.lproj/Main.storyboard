@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K3P-QR-S3s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="K3P-QR-S3s">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -490,10 +490,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ie5-Xa-l0o" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-PV-Mw0">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -545,20 +541,42 @@
                                     <constraint firstItem="oYP-pH-JC6" firstAttribute="leading" secondItem="oCu-cc-Xpc" secondAttribute="leading" id="vdX-ZC-cUu"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="249-12-nJN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLL-Yd-kiO">
+                                <rect key="frame" x="8" y="72" width="112" height="32"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="roY-qx-RQP"/>
+                                    <constraint firstAttribute="width" constant="112" id="ugN-XE-3eG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Near by place">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="actionRefreshNearByPlace:" destination="nXc-Kd-VcE" eventType="touchUpInside" id="8KB-Wk-yp7"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oCu-cc-Xpc" firstAttribute="top" secondItem="mef-As-8Pi" secondAttribute="top" id="6pj-aS-oVP"/>
-                            <constraint firstItem="ie5-Xa-l0o" firstAttribute="top" secondItem="mef-As-8Pi" secondAttribute="top" id="6rl-4u-duE"/>
-                            <constraint firstItem="ie5-Xa-l0o" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leading" id="JUG-6g-xF9"/>
+                            <constraint firstItem="249-12-nJN" firstAttribute="top" secondItem="oCu-cc-Xpc" secondAttribute="bottom" id="KEJ-Gi-xBy"/>
                             <constraint firstItem="Wld-PV-Mw0" firstAttribute="top" secondItem="SGc-mU-MBI" secondAttribute="bottom" id="KUj-Jz-d2q"/>
-                            <constraint firstAttribute="trailing" secondItem="ie5-Xa-l0o" secondAttribute="trailing" id="LMb-kJ-mSt"/>
                             <constraint firstAttribute="trailing" secondItem="Wld-PV-Mw0" secondAttribute="trailing" id="Oxf-OI-nOC"/>
+                            <constraint firstAttribute="trailing" secondItem="249-12-nJN" secondAttribute="trailing" id="Rvy-R2-Cup"/>
+                            <constraint firstItem="yLL-Yd-kiO" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leading" constant="8" id="Xrm-1Z-XQu"/>
+                            <constraint firstItem="249-12-nJN" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leading" id="bk9-37-QEI"/>
+                            <constraint firstItem="249-12-nJN" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leadingMargin" constant="-20" id="fFb-mr-Sz3"/>
                             <constraint firstItem="Wld-PV-Mw0" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leading" id="hQ5-EJ-MOq"/>
+                            <constraint firstItem="yLL-Yd-kiO" firstAttribute="top" secondItem="oCu-cc-Xpc" secondAttribute="bottom" constant="8" id="hQl-nb-aE7"/>
                             <constraint firstAttribute="trailing" secondItem="oCu-cc-Xpc" secondAttribute="trailing" id="ilq-lo-Pc7"/>
-                            <constraint firstItem="LbW-nl-I9f" firstAttribute="top" secondItem="ie5-Xa-l0o" secondAttribute="bottom" id="kJr-Lg-9GI"/>
                             <constraint firstItem="LbW-nl-I9f" firstAttribute="top" secondItem="Wld-PV-Mw0" secondAttribute="bottom" id="qCy-OZ-Dpo"/>
                             <constraint firstItem="oCu-cc-Xpc" firstAttribute="leading" secondItem="mef-As-8Pi" secondAttribute="leading" id="ugK-ug-EPQ"/>
+                            <constraint firstItem="LbW-nl-I9f" firstAttribute="top" secondItem="249-12-nJN" secondAttribute="bottom" id="yx4-4N-hYV"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -568,6 +586,7 @@
                                 <exclude reference="KUj-Jz-d2q"/>
                                 <exclude reference="Oxf-OI-nOC"/>
                                 <exclude reference="hQ5-EJ-MOq"/>
+                                <exclude reference="fFb-mr-Sz3"/>
                                 <exclude reference="qCy-OZ-Dpo"/>
                             </mask>
                         </variation>
@@ -591,8 +610,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnRefreshNearByPlace" destination="yLL-Yd-kiO" id="0fa-eM-T4O"/>
+                        <outlet property="googleMVContainer" destination="249-12-nJN" id="euJ-xM-BF7"/>
                         <outlet property="googleMapsContainer" destination="Wld-PV-Mw0" id="rnj-n0-nPx"/>
-                        <outlet property="googleMapsView" destination="ie5-Xa-l0o" id="BZV-yQ-gst"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgY-da-FOP" sceneMemberID="firstResponder"/>

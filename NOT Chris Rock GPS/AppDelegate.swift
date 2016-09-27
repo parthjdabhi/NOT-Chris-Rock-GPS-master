@@ -198,7 +198,7 @@ class UIApplicationTimer: UIApplication {
     func checkThisTap()
     {
         tapStack.append(NSDate())
-        print(" Count : ", tapStack.count, "First : ", tapStack.first, "Last : ", tapStack.last)
+        //print(" Count : ", tapStack.count, "First : ", tapStack.first, "Last : ", tapStack.last)
         
         if tapStack.count > 5 {
             tapStack.removeFirst()
@@ -216,7 +216,7 @@ class UIApplicationTimer: UIApplication {
     
     // If the timer reaches the limit as defined in timeoutInSeconds, post this notification.
     func DetectedFiveTaps() {
-        print("DetectedFiveTaps")
+        //print("DetectedFiveTaps")
         topViewController()?.ShowRecodringScreen()
         NSNotificationCenter.defaultCenter().postNotificationName(ApplicationDidFiveTapsNotification, object: nil)
     }
