@@ -12,6 +12,7 @@ import GooglePlaces
 
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
@@ -24,6 +25,10 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
     var searchResultController: SearchResultsController!
     var resultsArray = [String]()
     var locationManager = CLLocationManager()
+    
+    //To Store Food places
+    var places:[MyPlace] = []
+    var placesDetail:[JSON] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,7 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
 //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
 //        locationManager.startUpdatingLocation()
         
+        self.googleMapsView.delegate = self
         self.googleMapsView.myLocationEnabled = true
         self.googleMapsView.settings.myLocationButton = true
         
@@ -208,13 +214,18 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
         polyLine.map = self.googleMapsView
     }
     
+    @IBAction func actionGoToBack(sender: AnyObject)
+    {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func actionRefreshNearByPlace(sender: AnyObject)
     {
         //For Search Via Google Maps Api
-        showNearByPlaceByGoogleAPI(["food"])
+        //showNearByPlaceByGoogleAPI(["food"])
         
         //For Search Via Yelp
-        //showNearByPlace(["food"])
+        showNearByPlace(["food"])
     }
     
     //Searcing by yelp api
@@ -222,14 +233,28 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
     {
         
         client.searchPlacesWithParameters(["ll": "\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)", "category_filter": "burgers", "radius_filter": "3000","term": "food", "sort": "0"], successSearch: { (data, response) -> Void in
-            print(NSString(data: data, encoding: NSUTF8StringEncoding))
-            print("Search : ", NSString(data: data, encoding: NSUTF8StringEncoding))
-            let json = JSON(data)
+            
+            //print(data.stringValue)
+            
+            let json = JSON(data.stringValue?.convertToDictionary ?? [:])
             print(json)
             
-            if (json["response"].string ?? "") == "success" {
+            if let businesses = json["businesses"].array {
+                for business in businesses {
+                    
+                    //print(business)
+                    let place = MyPlace(json: business, Types: ["food"])
+                    
+                    self.places.append(place)
+                    self.placesDetail.append(business)
+                }
                 
+                for place: MyPlace in self.places {
+                    let marker = PlaceMarker(place: place)
+                    marker.map = self.googleMapsView
+                }
             }
+            
 //            self.burgerLabel.text = String(client.searchPlacesWithParameters(["ll": "37.788022,-122.399797", "category_filter": "burgers", "radius_filter": "3000", "sort": "0"], successSearch: { (data, response) -> Void in
 //            }) { (error) -> Void in
 //                print(error)
@@ -266,18 +291,13 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
                     print("Error",errornum)
                 } else {
                     
-                    var places:[GMSMarker] = []
-                    
-                    let marker = GMSMarker(position: CLocation!.coordinate)
-                    marker.groundAnchor = CGPoint(x: 0.5, y: 1)
-                    marker.appearAnimation = kGMSMarkerAnimationPop
-                    marker.icon = UIImage(named: "default_marker.png")
-                    places.append(marker)
+                    //var places:[GMSMarker] = []
                     
                     if let results = json["results"].array
                         where results.count > 0
                     {
                         //name
+                        
                         for result in results {
                             let marker = GMSMarker()
                             marker.groundAnchor = CGPoint(x: 0.5, y: 1)
@@ -288,12 +308,14 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
                             marker.snippet = result["vicinity"].string
                             
                             marker.position = CLLocation(latitude: (result["geometry"]["location"]["lat"].double ?? 0), longitude: result["geometry"]["location"]["lng"].double ?? 0).coordinate
-                            places.append(marker)
                             
+                            let place = MyPlace(json: result, Types: ["food"])
+                            self.places.append(place)
                         }
                         
-                        for place: GMSMarker in places {
-                            place.map = self.googleMapsView
+                        for place: MyPlace in self.places {
+                            let marker = PlaceMarker(place: place)
+                            marker.map = self.googleMapsView
                         }
                         
                     } else {
@@ -306,4 +328,50 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
             }
         }
     }
+    
+    // MARK: - GMSMapViewDelegate
+    
+    func mapView(mapView: GMSMapView, idleAtCameraPosition position: GMSCameraPosition) {
+        print(position.target)
+    }
+    
+    func mapView(mapView: GMSMapView, willMove gesture: Bool) {
+        if (gesture) {
+            mapView.selectedMarker = nil
+        }
+    }
+    
+    func mapView(mapView: GMSMapView, markerInfoContents marker: GMSMarker) -> UIView? {
+        let placeMarker = marker as! PlaceMarker
+        
+        if let infoView = UIView.viewFromNibName("MarkerInfoView") as? MarkerInfoView {
+            infoView.nameLabel.text = placeMarker.place.name
+            
+            if let photo = placeMarker.place.photo {
+                infoView.placePhoto.image = photo
+            } else {
+                infoView.placePhoto.image = UIImage(named: "button_compass_night.png")
+            }
+            
+            if let ratingPhoto = placeMarker.place.ratingPhoto {
+                infoView.ratingPhoto.image = ratingPhoto
+            } else {
+                infoView.ratingPhoto.image = UIImage(named: "button_compass_night.png")
+            }
+            
+            return infoView
+        } else {
+            return nil
+        }
+    }
+    
+    func mapView(mapView: GMSMapView, didTapMarker marker: GMSMarker) -> Bool {
+        return false
+    }
+    
+    func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
+        mapView.selectedMarker = nil
+        return false
+    }
 }
+
