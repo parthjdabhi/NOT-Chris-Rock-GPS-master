@@ -10,12 +10,15 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
+import SWRevealViewController
 import Alamofire
 import SwiftyJSON
 import SDWebImage
 
 class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateOnTheMap, GMSMapViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet var btnMenu: UIButton?
+    @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var googleMapsContainer: UIView!
     //@IBOutlet var googleMapsView: GMSMapView!
     @IBOutlet var googleMVContainer: UIView!
@@ -35,8 +38,21 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
         //self.navigationController?.navigationBarHidden = false
         // Do any additional setup after loading the view, typically from a nib.
         
+        isEnableFivetapGesture = false
+        startFiveTapGesture()
+        
+        btnSearch.titleLabel?.numberOfLines = 2
+        btnSearch.titleLabel?.textAlignment = .Center
+        
         btnRefreshNearByPlace.setCornerRadious()
         btnRefreshNearByPlace.setBorder(1.0, color: clrGreen)
+        
+        // Init menu button action for menu
+        if let revealVC = self.revealViewController() {
+            self.btnMenu?.addTarget(revealVC, action: #selector(revealVC.revealToggle(_:)), forControlEvents: .TouchUpInside)
+            //            self.view.addGestureRecognizer(revealVC.panGestureRecognizer());
+            //            self.navigationController?.navigationBar.addGestureRecognizer(revealVC.panGestureRecognizer())
+        }
         
         googleMVContainer.layoutIfNeeded()
         var frameMV = googleMVContainer.frame
@@ -72,6 +88,7 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
     {
         let searchController = UISearchController(searchResultsController: searchResultController)
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholderText = "Search your destination"
         self.presentViewController(searchController, animated: true, completion: nil)
     }
 
@@ -168,7 +185,7 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
     
     func addOverlayToMapView()
     {
-        let directionURL = "https://maps.googleapis.com/maps/api/directions/json?origin=\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)&destination=\(CLocationSelected.coordinate.latitude),\(CLocationSelected.coordinate.longitude)&key=\(googleMapsApiKey)&mode=walking"
+        let directionURL = "https://maps.googleapis.com/maps/api/directions/json?origin=\(CLocation!.coordinate.latitude),\(CLocation!.coordinate.longitude)&destination=\(CLocationSelected.coordinate.latitude),\(CLocationSelected.coordinate.longitude)&key=\(googleMapsApiKey)&mode=driving"
         //mode:driving,walking,bicycling,transit
         print(directionURL)
         
@@ -185,7 +202,6 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
                 if (errornum == true) {
                     print("Error",errornum)
                 } else {
-                    
                     if let routes = json["routes"].array
                         where routes.count > 0
                     {

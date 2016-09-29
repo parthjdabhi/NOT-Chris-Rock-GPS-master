@@ -9,4 +9,4 @@
 import Foundation
 import UIKit
 
-UIApplicationMain(Process.argc, Process.unsafeArgv, NSStringFromClass(UIApplicationTimer), NSStringFromClass(AppDelegate))
+//UIApplicationMain(Process.argc, Process.unsafeArgv, NSStringFromClass(UIApplicationTimer), NSStringFromClass(AppDelegate))

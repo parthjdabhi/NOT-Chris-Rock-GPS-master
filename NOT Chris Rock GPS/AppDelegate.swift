@@ -15,11 +15,13 @@ import FBSDKLoginKit
 import IQKeyboardManagerSwift
 import SVProgressHUD
 
-//@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate, LocationManagerDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController?
+    var locationManager = LocationManager.sharedInstance
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         GMSServices.provideAPIKey(googleMapsApiKey)
@@ -42,15 +44,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             userDetail = user
             
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            //let rootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as? UIViewController
-            //let navigationController = UINavigationController(rootViewController: rootViewController!)
-            
-            let navigationController = mainStoryboard.instantiateViewControllerWithIdentifier("navHome") as? UINavigationController
-            navigationController?.navigationBarHidden = true
+            let rootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as? UIViewController
+            let navigationController = UINavigationController(rootViewController: rootViewController!)
+            navigationController.navigationBarHidden = true // or not, your choice.
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             self.window!.rootViewController = navigationController
             self.window!.makeKeyAndVisible()
+            
+//            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            //let rootViewController = mainStoryboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as? UIViewController
+//            //let navigationController = UINavigationController(rootViewController: rootViewController!)
+//            let navigationController = mainStoryboard.instantiateViewControllerWithIdentifier("navHome") as? UINavigationController
+//            navigationController?.navigationBarHidden = true
+//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            self.window!.rootViewController = navigationController
+//            self.window!.makeKeyAndVisible()
         }
+        
+        //Location Manager
+        
+        locationManager.autoUpdate = true
+        locationManager.delegate = self
+        locationManager.startUpdatingLocationWithCompletionHandler { (latitude, longitude, status, verboseMessage, error) in
+            CLocation = CLLocation(latitude: latitude, longitude: longitude)
+        }
+        
+        CLocation = CLLocation(latitude: locationManager.latitude, longitude: locationManager.longitude)
         
         return true
     }
@@ -97,6 +116,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let loginManager: FBSDKLoginManager = FBSDKLoginManager()
         loginManager.logOut()
     }
+    
+    //MARK: - Location Manager Delegate
+    
+    func locationFound(latitude:Double, longitude:Double) {
+    }
+    
+    func locationFoundGetAsString(latitude:NSString, longitude:NSString) {
+        
+    }
+    
+    func locationManagerStatus(status:NSString) {
+        
+    }
+    
+    func locationManagerReceivedError(error:NSString) {
+        
+    }
+    
+    func locationManagerVerboseMessage(message:NSString) {
+        
+    }
+    
+    // MARK: -
 
     // MARK: - Core Data stack
 
@@ -126,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
 
-            dict[NSUnderlyingErrorKey] = error as NSError
+            dict[NSUnderlyingErrorKey] = error as! NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -163,62 +205,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 // MARK: - Tap Detector
-
-var tapStack:Array<NSDate> = []
-let ApplicationDidFiveTapsNotification = "DetectedFiveTaps"
-
-class UIApplicationTimer: UIApplication {
-    
-    static let ApplicationDidTimoutNotification = "AppTimout"
-    
-    // The timeout in seconds for when to fire the idle timer.
-    let tapInSeconds: NSTimeInterval = 5 //* 60
-    
-    var idleTimer: NSTimer?
-    
-    // Listen for any touch. If the screen receives a touch, the timer is reset.
-    override func sendEvent(event: UIEvent) {
-        super.sendEvent(event)
-        
-//        if idleTimer != nil {
-//            self.resetIdleTimer()
+//
+//var tapStack:Array<NSDate> = []
+//let ApplicationDidFiveTapsNotification = "DetectedFiveTaps"
+//
+//class UIApplicationTimer: UIApplication {
+//    
+//    static let ApplicationDidTimoutNotification = "AppTimout"
+//    
+//    // The timeout in seconds for when to fire the idle timer.
+//    let tapInSeconds: NSTimeInterval = 5 //* 60
+//    
+//    var idleTimer: NSTimer?
+//    
+//    // Listen for any touch. If the screen receives a touch, the timer is reset.
+//    override func sendEvent(event: UIEvent) {
+//        super.sendEvent(event)
+//        
+////        if idleTimer != nil {
+////            self.resetIdleTimer()
+////        }
+//        
+//        if let touches = event.allTouches() {
+//            for touch in touches {
+//                if touch.phase == UITouchPhase.Began {
+//                    self.checkThisTap()
+//                }
+//            }
 //        }
-        
-        if let touches = event.allTouches() {
-            for touch in touches {
-                if touch.phase == UITouchPhase.Began {
-                    self.checkThisTap()
-                }
-            }
-        }
-    }
-    
-    // Resent the timer because there was user interaction.
-    // Resent the timer because there was user interaction.
-    func checkThisTap()
-    {
-        tapStack.append(NSDate())
-        //print(" Count : ", tapStack.count, "First : ", tapStack.first, "Last : ", tapStack.last)
-        
-        if tapStack.count > 5 {
-            tapStack.removeFirst()
-        }
-        
-        if tapStack.count == 5 {
-            let elapsedTime = tapStack.last!.timeIntervalSinceDate(tapStack.first!)
-            //let duration = Int(elapsedTime)
-            if elapsedTime <= tapInSeconds { //Timeout time to detect taps in 10 seconds
-                tapStack.removeAll()
-                DetectedFiveTaps()
-            }
-        }
-    }
-    
-    // If the timer reaches the limit as defined in timeoutInSeconds, post this notification.
-    func DetectedFiveTaps() {
-        //print("DetectedFiveTaps")
-        topViewController()?.ShowRecodringScreen()
-        NSNotificationCenter.defaultCenter().postNotificationName(ApplicationDidFiveTapsNotification, object: nil)
-    }
-}
+//    }
+//    
+//    // Resent the timer because there was user interaction.
+//    // Resent the timer because there was user interaction.
+//    func checkThisTap()
+//    {
+//        tapStack.append(NSDate())
+//        //print(" Count : ", tapStack.count, "First : ", tapStack.first, "Last : ", tapStack.last)
+//        
+//        if tapStack.count > 5 {
+//            tapStack.removeFirst()
+//        }
+//        
+//        if tapStack.count == 5 {
+//            let elapsedTime = tapStack.last!.timeIntervalSinceDate(tapStack.first!)
+//            //let duration = Int(elapsedTime)
+//            if elapsedTime <= tapInSeconds { //Timeout time to detect taps in 10 seconds
+//                tapStack.removeAll()
+//                DetectedFiveTaps()
+//            }
+//        }
+//    }
+//    
+//    // If the timer reaches the limit as defined in timeoutInSeconds, post this notification.
+//    func DetectedFiveTaps() {
+//        //print("DetectedFiveTaps")
+//        topViewController()?.ShowRecodringScreen()
+//        NSNotificationCenter.defaultCenter().postNotificationName(ApplicationDidFiveTapsNotification, object: nil)
+//    }
+//}
 

@@ -28,6 +28,8 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 
+pod 'SWRevealViewController', '~> 2.3'
+
 pod 'SDWebImage', '~>3.8'
 pod 'UIActivityIndicator-for-SDWebImage'
 

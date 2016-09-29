@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E38581A1D99801F00DEC418 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3858191D99801F00DEC418 /* PlaceViewController.swift */; };
 		5E65AB131D9542560025CBE3 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */; };
-		5E65AB151D95507C0025CBE3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65AB141D95507C0025CBE3 /* main.swift */; };
+		5E65AB151D95507C0025CBE3 /* main_unused.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E65AB141D95507C0025CBE3 /* main_unused.swift */; };
 		5E9786831D9255420031B0CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E9786821D9255420031B0CB /* Images.xcassets */; };
 		5E9786891D92559D0031B0CB /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786851D92559D0031B0CB /* AudioRecorderViewController.swift */; };
 		5E97868A1D92559D0031B0CB /* AudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9786861D92559D0031B0CB /* AudioRecorderViewController.xib */; };
@@ -19,6 +19,9 @@
 		5E9786961D928B520031B0CB /* MyExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786951D928B520031B0CB /* MyExtention.swift */; };
 		5E9786981D92AAA70031B0CB /* PDSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9786971D92AAA70031B0CB /* PDSwitch.swift */; };
 		5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA274211D945E7B001AB48D /* SetDataViewController.swift */; };
+		5EA96E3E1D9D525E00611E0A /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA96E3D1D9D525E00611E0A /* UserLocation.swift */; };
+		5EA96E421D9D554200611E0A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA96E411D9D554200611E0A /* LocationManager.swift */; };
+		5EA96E441D9D853500611E0A /* MySlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA96E431D9D853500611E0A /* MySlideMenuController.swift */; };
 		5EDC16651D9C0DE800C16904 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC16631D9C0DE800C16904 /* MarkerInfoView.swift */; };
 		5EDC16661D9C0DE800C16904 /* MarkerInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EDC16641D9C0DE800C16904 /* MarkerInfoView.xib */; };
 		5EDC16681D9C0F6F00C16904 /* PlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC16671D9C0F6F00C16904 /* PlaceMarker.swift */; };
@@ -69,7 +72,7 @@
 /* Begin PBXFileReference section */
 		5E3858191D99801F00DEC418 /* PlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
-		5E65AB141D95507C0025CBE3 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5E65AB141D95507C0025CBE3 /* main_unused.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main_unused.swift; sourceTree = "<group>"; };
 		5E9786821D9255420031B0CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5E9786851D92559D0031B0CB /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
 		5E9786861D92559D0031B0CB /* AudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioRecorderViewController.xib; sourceTree = "<group>"; };
@@ -79,6 +82,9 @@
 		5E9786951D928B520031B0CB /* MyExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyExtention.swift; sourceTree = "<group>"; };
 		5E9786971D92AAA70031B0CB /* PDSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDSwitch.swift; sourceTree = "<group>"; };
 		5EA274211D945E7B001AB48D /* SetDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDataViewController.swift; sourceTree = "<group>"; };
+		5EA96E3D1D9D525E00611E0A /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		5EA96E411D9D554200611E0A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = ../LocationManager.swift; sourceTree = "<group>"; };
+		5EA96E431D9D853500611E0A /* MySlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySlideMenuController.swift; sourceTree = "<group>"; };
 		5EDC16631D9C0DE800C16904 /* MarkerInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		5EDC16641D9C0DE800C16904 /* MarkerInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarkerInfoView.xib; sourceTree = "<group>"; };
 		5EDC16671D9C0F6F00C16904 /* PlaceMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceMarker.swift; sourceTree = "<group>"; };
@@ -208,13 +214,14 @@
 			isa = PBXGroup;
 			children = (
 				DA6AE7FD1D88C8D6001E5B65 /* Storyboard & Plist */,
-				5E65AB141D95507C0025CBE3 /* main.swift */,
+				5E65AB141D95507C0025CBE3 /* main_unused.swift */,
 				DA6AE7C11D88C782001E5B65 /* AppDelegate.swift */,
 				5EDF398B1D9ABB660058C704 /* GUtility.swift */,
 				5EDC16691D9C0FA500C16904 /* MyPlace.swift */,
 				5EDC16671D9C0F6F00C16904 /* PlaceMarker.swift */,
 				5EDC16631D9C0DE800C16904 /* MarkerInfoView.swift */,
 				5EDC16641D9C0DE800C16904 /* MarkerInfoView.xib */,
+				5EA96E431D9D853500611E0A /* MySlideMenuController.swift */,
 				5E97868D1D925AD30031B0CB /* Login Signup */,
 				DA6AE8131D8A24AE001E5B65 /* MainViewController.swift */,
 				DA6AE7C31D88C782001E5B65 /* ViewController.swift */,
@@ -248,6 +255,8 @@
 		DA6AE7F21D88C7A8001E5B65 /* Helper Files */ = {
 			isa = PBXGroup;
 			children = (
+				5EA96E3D1D9D525E00611E0A /* UserLocation.swift */,
+				5EA96E411D9D554200611E0A /* LocationManager.swift */,
 				5E9786971D92AAA70031B0CB /* PDSwitch.swift */,
 				5E65AB121D9542560025CBE3 /* UIViewControllerExt.swift */,
 				5E9786951D928B520031B0CB /* MyExtention.swift */,
@@ -502,7 +511,9 @@
 				5E65AB131D9542560025CBE3 /* UIViewControllerExt.swift in Sources */,
 				DA6AE80A1D89A8BA001E5B65 /* WeatherGetter.swift in Sources */,
 				DA6AE7FA1D88C850001E5B65 /* MBProgressHUD.m in Sources */,
+				5EA96E441D9D853500611E0A /* MySlideMenuController.swift in Sources */,
 				DA6AE8001D88C907001E5B65 /* AppState.swift in Sources */,
+				5EA96E3E1D9D525E00611E0A /* UserLocation.swift in Sources */,
 				DA6AE7F61D88C805001E5B65 /* CommonUtils.swift in Sources */,
 				DA334BF61D8A81AE002E4E1F /* MultipleTapViewController.swift in Sources */,
 				5E9786961D928B520031B0CB /* MyExtention.swift in Sources */,
@@ -511,8 +522,9 @@
 				DA6AE8141D8A24AE001E5B65 /* MainViewController.swift in Sources */,
 				5E9786941D925EBF0031B0CB /* testViewController.swift in Sources */,
 				5EA274221D945E7B001AB48D /* SetDataViewController.swift in Sources */,
+				5EA96E421D9D554200611E0A /* LocationManager.swift in Sources */,
 				DA6AE8081D89124C001E5B65 /* OpenWeatherViewController.swift in Sources */,
-				5E65AB151D95507C0025CBE3 /* main.swift in Sources */,
+				5E65AB151D95507C0025CBE3 /* main_unused.swift in Sources */,
 				5EDC16681D9C0F6F00C16904 /* PlaceMarker.swift in Sources */,
 				DA6AE7CA1D88C782001E5B65 /* NOT_Chris_Rock_GPS.xcdatamodeld in Sources */,
 				DA6AE80D1D89B169001E5B65 /* Weather.swift in Sources */,

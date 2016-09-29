@@ -45,6 +45,7 @@ PODS:
   - SDWebImage/Core (3.8.2)
   - SVProgressHUD (2.0.3)
   - SwiftyJSON (2.3.2)
+  - SWRevealViewController (2.3.0)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
 
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.8)
   - SVProgressHUD (~> 2.0)
   - SwiftyJSON (~> 2.3)
+  - SWRevealViewController (~> 2.3)
   - UIActivityIndicator-for-SDWebImage
   - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
@@ -90,8 +92,9 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-PODFILE CHECKSUM: 22633175849e650e7018791c543a33c4cb83bbbd
+PODFILE CHECKSUM: 55f7bd2f33e0181f2e7fcda21dd7e31e68ffe28b
 
 COCOAPODS: 1.0.1
