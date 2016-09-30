@@ -75,12 +75,12 @@ class MainViewController: UIViewController, GMSMapViewDelegate, CLLocationManage
             LocationManager.sharedInstance.onFirstLocationUpdateWithCompletionHandler { (latitude, longitude, status, verboseMessage, error) in
                 print(latitude,longitude,status)
                 CLocation = CLLocation(latitude: latitude, longitude: longitude)
-                self.googleMapsView.camera = GMSCameraPosition(target: CLocation!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+                self.googleMapsView.animateToCameraPosition(GMSCameraPosition(target: CLocation!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0))
                 //For Search Via Yelp
                 self.showNearByPlace(["food"])
             }
         } else {
-            self.googleMapsView.camera = GMSCameraPosition(target: CLocation!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+            self.googleMapsView.animateToCameraPosition(GMSCameraPosition(target: CLocation!.coordinate, zoom: 15, bearing: 0, viewingAngle: 0))
             //For Search Via Yelp
             showNearByPlace(["food"])
         }

@@ -56,7 +56,6 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - GoogleMaps
   - GooglePlacePicker
   - GooglePlaces
   - GTMOAuth2 (~> 1.1.0)
@@ -64,13 +63,11 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Mixpanel
   - OAuthSwift (~> 0.5.0)
-  - SDWebImage (~> 3.7)
   - SDWebImage (~> 3.8)
   - SVProgressHUD (~> 2.0)
   - SwiftyJSON (~> 2.3)
   - SWRevealViewController (~> 2.3)
   - UIActivityIndicator-for-SDWebImage
-  - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
@@ -95,6 +92,6 @@ SPEC CHECKSUMS:
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-PODFILE CHECKSUM: 55f7bd2f33e0181f2e7fcda21dd7e31e68ffe28b
+PODFILE CHECKSUM: ac333f1fd77b04744a638c8d7e82dc1b4c5a0435
 
 COCOAPODS: 1.0.1

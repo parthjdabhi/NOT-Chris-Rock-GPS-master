@@ -20,11 +20,11 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
     @IBOutlet var btnMenu: UIButton?
     @IBOutlet weak var btnSearch: UIButton!
     @IBOutlet weak var googleMapsContainer: UIView!
-    //@IBOutlet var googleMapsView: GMSMapView!
-    @IBOutlet var googleMVContainer: UIView!
+    @IBOutlet weak var googleMapsView : GMSMapView!
+    //@IBOutlet var googleMVContainer: UIView!
     @IBOutlet weak var btnRefreshNearByPlace: UIButton!
     
-    var googleMapsView: GMSMapView!
+    //var googleMapsView: GMSMapView!
     var searchResultController: SearchResultsController!
     var resultsArray = [String]()
     var locationManager = CLLocationManager()
@@ -50,18 +50,20 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
         // Init menu button action for menu
         if let revealVC = self.revealViewController() {
             self.btnMenu?.addTarget(revealVC, action: #selector(revealVC.revealToggle(_:)), forControlEvents: .TouchUpInside)
-            //            self.view.addGestureRecognizer(revealVC.panGestureRecognizer());
-            //            self.navigationController?.navigationBar.addGestureRecognizer(revealVC.panGestureRecognizer())
+            //self.view.addGestureRecognizer(revealVC.panGestureRecognizer());
+            //self.navigationController?.navigationBar.addGestureRecognizer(revealVC.panGestureRecognizer())
         }
         
-        googleMVContainer.layoutIfNeeded()
-        var frameMV = googleMVContainer.frame
-        frameMV.origin.y = 0
-        googleMapsView = GMSMapView(frame: frameMV)
-        self.googleMVContainer.insertSubview(self.googleMapsView, atIndex: 0)
+        //googleMVContainer.layoutIfNeeded()
+        //var frameMV = googleMVContainer.frame
+        //frameMV.origin.y = 0
+        //googleMapsView = GMSMapView(frame: frameMV)
+        //self.googleMVContainer.insertSubview(self.googleMapsView, atIndex: 0)
         
-        GMSServices.provideAPIKey(googleMapsApiKey)
+        //GMSServices.provideAPIKey(googleMapsApiKey)
         //self.googleMapsView.addObserver(self, forKeyPath: "myLocation", options: .New, context: nil)
+        let camera = GMSCameraPosition.cameraWithLatitude(53.9,longitude: 27.5667, zoom: 6)
+        self.googleMapsView.animateToCameraPosition(camera)
         
 //        locationManager.delegate = self
 //        locationManager.requestWhenInUseAuthorization()
@@ -106,7 +108,7 @@ class GooglePlacesViewController: UIViewController, UISearchBarDelegate, LocateO
             
             let marker = GMSMarker(position: position)
             let camera = GMSCameraPosition.cameraWithLatitude(lat, longitude: lon, zoom: 10)
-            self.googleMapsView.camera = camera
+            self.googleMapsView.animateToCameraPosition(camera)
             
             marker.title = "\(title)"
             //marker.snippet = "NOT chris rock"

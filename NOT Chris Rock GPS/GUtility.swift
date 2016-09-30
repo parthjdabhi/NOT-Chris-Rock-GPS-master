@@ -50,3 +50,51 @@ class GUtility: NSObject {
 //    }
 //    
 //}
+
+
+//- (void)drawRoute
+//    {
+//        [self fetchPolylineWithOrigin:myOrigin destination:myDestination completionHandler:^(GMSPolyline *polyline)
+//            {
+//            if(polyline)
+//            polyline.map = self.myMap;
+//            }];
+//    }
+//    
+//- (void)fetchPolylineWithOrigin:(CLLocation *)origin destination:(CLLocation *)destination completionHandler:(void (^)(GMSPolyline *))completionHandler
+//{
+//    NSString *originString = [NSString stringWithFormat:@"%f,%f", origin.coordinate.latitude, origin.coordinate.longitude];
+//    NSString *destinationString = [NSString stringWithFormat:@"%f,%f", destination.coordinate.latitude, destination.coordinate.longitude];
+//    NSString *directionsAPI = @"https://maps.googleapis.com/maps/api/directions/json?";
+//    NSString *directionsUrlString = [NSString stringWithFormat:@"%@&origin=%@&destination=%@&mode=driving", directionsAPI, originString, destinationString];
+//    NSURL *directionsUrl = [NSURL URLWithString:directionsUrlString];
+//    
+//    
+//    NSURLSessionDataTask *fetchDirectionsTask = [[NSURLSession sharedSession] dataTaskWithURL:directionsUrl completionHandler:
+//    ^(NSData *data, NSURLResponse *response, NSError *error)
+//    {
+//    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+//    if(error)
+//    {
+//    if(completionHandler)
+//    completionHandler(nil);
+//    return;
+//    }
+//    
+//    NSArray *routesArray = [json objectForKey:@"routes"];
+//    
+//    GMSPolyline *polyline = nil;
+//    if ([routesArray count] > 0)
+//    {
+//    NSDictionary *routeDict = [routesArray objectAtIndex:0];
+//    NSDictionary *routeOverviewPolyline = [routeDict objectForKey:@"overview_polyline"];
+//    NSString *points = [routeOverviewPolyline objectForKey:@"points"];
+//    GMSPath *path = [GMSPath pathFromEncodedPath:points];
+//    polyline = [GMSPolyline polylineWithPath:path];
+//    }
+//    
+//    if(completionHandler)
+//    completionHandler(polyline);
+//    }];
+//    [fetchDirectionsTask resume];
+//}
